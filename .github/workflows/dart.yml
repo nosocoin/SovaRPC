@@ -41,8 +41,7 @@ jobs:
           name: rpc-output
           path: release/rpc_ubuntu.tar.gz
 
-
-release:
+  release:
     if: github.actor == 'pasichDev'
     needs: build
     runs-on: ubuntu-latest
