@@ -11,39 +11,91 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-ubuntu:
     if: github.actor == 'pasichDev'
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+      - uses: dart-lang/setup-dart@v1
 
       - name: Install dependencies
         run: dart pub get
-
-      # Note: This workflow uses the latest stable version of the Flutter SDK.
-     # - uses: subosito/flutter-action@v2
-     #   with:
-     #     flutter-version: '3.22.3' # Вкажіть необхідну версію Flutter
-
-   #   - name: Install dependencies
-    #    run: flutter pub get
-
-      - name: Compile Dart CLI
+        
+      - name: Compile RPC
         run: dart compile exe bin/rpc.dart -o rpc
+        
+      - name: Compile Wallet
+        run: dart compile exe bin/wallet.dart -o wallet
 
       - name: Prepare artifact
         run: |
           mkdir -p release
-          mv rpc release/
-          tar -czvf release/rpc_ubuntu.tar.gz -C release rpc
-          ls -l release # Додано для перевірки наявності файлів
+          mv rpc wallet release/
+          tar -czvf release/SovaCLI-ubuntu-latest-x86_64.tar.gz -C release .
+          ls -l release 
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: rpc-output
-          path: release/rpc_ubuntu.tar.gz
+          name: sova-cli-ubuntu
+          path: release/SovaCLI-ubuntu-latest-x86_64.tar.gz
 
- 
+  build-windows:
+    if: github.actor == 'pasichDev'
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: dart pub get
+        
+      - name: Compile RPC
+        run: dart compile exe bin/rpc.dart -o rpc.exe
+        
+      - name: Compile Wallet
+        run: dart compile exe bin/wallet.dart -o wallet.exe
+
+      - name: Prepare artifact
+        run: |
+          mkdir release
+          mv rpc.exe wallet.exe release/
+          Compress-Archive -Path release\* -DestinationPath release\SovaCLI-windows-latest-x86_64.zip
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: sova-cli-windows
+          path: release\SovaCLI-windows-latest-x86_64.zip
+
+  build-macos:
+    if: github.actor == 'pasichDev'
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: dart pub get
+        
+      - name: Compile RPC
+        run: dart compile exe bin/rpc.dart -o rpc
+        
+      - name: Compile Wallet
+        run: dart compile exe bin/wallet.dart -o wallet
+
+      - name: Prepare artifact
+        run: |
+          mkdir -p release
+          mv rpc wallet release/
+          tar -czvf release/SovaCLI-macos-latest-x86_64.tar.gz -C release .
+          ls -l release 
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: sova-cli-macos
+          path: release/SovaCLI-macos-latest-x86_64.tar.gz
