@@ -90,8 +90,8 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          mkdir -p release/sova-cli/x64
-          mv rpc_x64 wallet_x64 release/sova-cli/x64/
+          mkdir -p release/sova-cli/
+          mv rpc wallet release/sova-cli/
           tar -czvf release/SovaCLI-macos-x64-latest.tar.gz -C release sova-cli
           ls -l release 
 
@@ -120,8 +120,8 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          mkdir -p release/sova-cli/arm64
-          mv rpc_arm64 wallet_arm64 release/sova-cli/arm64/
+          mkdir -p release/sova-cli/
+          mv rpc wallet release/sova-cli/
           tar -czvf release/SovaCLI-macos-arm64-latest.tar.gz -C release sova-cli
           ls -l release 
 
