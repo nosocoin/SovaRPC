@@ -41,35 +41,35 @@ jobs:
           name: sova-cli-ubuntu
           path: release/SovaCLI-ubuntu-latest-x86_64.tar.gz
 
- build-windows:
-  if: github.actor == 'pasichDev'
-  runs-on: windows-latest
+  build-windows:
+    if: github.actor == 'pasichDev'
+    runs-on: windows-latest
 
-  steps:
-    - uses: actions/checkout@v4
-    - uses: dart-lang/setup-dart@v1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
 
-    - name: Install dependencies
-      run: dart pub get
-      
-    - name: Compile RPC
-      run: dart compile exe bin/rpc.dart -o rpc.exe
-      
-    - name: Compile Wallet
-      run: dart compile exe bin/wallet.dart -o wallet.exe
+      - name: Install dependencies
+        run: dart pub get
+        
+      - name: Compile RPC
+        run: dart compile exe bin/rpc.dart -o rpc.exe
+        
+      - name: Compile Wallet
+        run: dart compile exe bin/wallet.dart -o wallet.exe
 
-    - name: Prepare artifact
-      run: |
-        mkdir release\sova-cli
-        Move-Item -Path rpc.exe -Destination release\sova-cli\
-        Move-Item -Path wallet.exe -Destination release\sova-cli\
-        Compress-Archive -Path release\sova-cli\* -DestinationPath release\SovaCLI-windows-latest-x86_64.zip
+      - name: Prepare artifact
+        run: |
+          mkdir release\sova-cli
+          Move-Item -Path rpc.exe -Destination release\sova-cli\
+          Move-Item -Path wallet.exe -Destination release\sova-cli\
+          Compress-Archive -Path release\sova-cli\* -DestinationPath release\SovaCLI-windows-latest-x86_64.zip
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: sova-cli-windows
-        path: release\SovaCLI-windows-latest-x86_64.zip
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: sova-cli-windows
+          path: release\SovaCLI-windows-latest-x86_64.zip
 
   build-macos-x64:
     if: github.actor == 'pasichDev'
@@ -103,7 +103,7 @@ jobs:
 
   build-macos-arm64:
     if: github.actor == 'pasichDev'
-    runs-on: macos-latest-xlarge 
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -113,10 +113,10 @@ jobs:
         run: dart pub get
         
       - name: Compile RPC
-        run: dart compile exe bin/rpc.dart -o rpc_arm64
+        run: dart compile exe bin/rpc.dart -o rpc_arm64 --target-os=macos --target-arch=arm64
         
       - name: Compile Wallet
-        run: dart compile exe bin/wallet.dart -o wallet_arm64
+        run: dart compile exe bin/wallet.dart -o wallet_arm64 --target-os=macos --target-arch=arm64
 
       - name: Prepare artifact
         run: |
