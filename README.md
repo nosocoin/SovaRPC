@@ -1,7 +1,6 @@
 # SovaRPC
 
 An add-on to the NosoSova wallet that adds RPC support.
-Currently, both **GUI** and **CLI** are supported.
 
 ## Docs
 
