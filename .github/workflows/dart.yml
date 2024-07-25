@@ -22,7 +22,7 @@ jobs:
       # Note: This workflow uses the latest stable version of the Flutter SDK.
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'latest' # Або вкажіть необхідну версію Flutter
+          flutter-version: '3.22.3' # Або вкажіть необхідну версію Flutter
 
       - name: Install dependencies
         run: flutter pub get
