@@ -522,10 +522,10 @@ packages:
     dependency: "direct main"
     description:
       name: noso_dart
-      sha256: "6b29f1d7623d1845d163f103552169c2903ef3735042ef796e78d7e77a372702"
+      sha256: d08e5772f87a95272c64aacea832f35a404c21871317e60c2128d6642ab07e1c
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.4"
+    version: "1.2.5"
   noso_rest_api:
     dependency: "direct main"
     description:
