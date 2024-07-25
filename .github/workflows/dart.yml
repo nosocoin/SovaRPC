@@ -34,6 +34,7 @@ jobs:
           mkdir -p release
           mv rpc release/
           tar -czvf release/rpc_ubuntu.tar.gz -C release rpc
+          ls -l release # Додано для перевірки наявності файлів
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
