@@ -22,10 +22,8 @@ dependencies:
   get_it: ^7.6.7
   shared_preferences: ^2.2.2
   http: ^1.2.0
-  window_manager: ^0.3.8
   shelf: ^1.4.1
   shelf_router: ^1.1.4
-  file_picker: ^5.5.0
   noso_dart: 1.2.4
   noso_rest_api:
     git: https://github.com/Noso-Project/noso_rest_api.git
