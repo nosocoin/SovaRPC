@@ -42,7 +42,7 @@ jobs:
           name: rpc-output
           path: release/rpc_ubuntu.tar.gz
 
-  release:
+ release:
     if: github.actor == 'pasichDev'
     needs: build
     runs-on: ubuntu-latest
@@ -59,12 +59,13 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ env.VERSION }}
           release_name: Release ${{ env.VERSION }}
           draft: false
           prerelease: false
-          generate_release_notes: true
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
