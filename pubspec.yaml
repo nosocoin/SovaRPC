@@ -8,8 +8,6 @@ environment:
   sdk: '>=3.3.2 <4.0.0'
 
 dependencies:
-  flutter:
-    sdk: flutter
   archive: ^3.4.10
   flutter_gen: ^5.3.1
   flutter_bloc: ^8.1.4
@@ -32,15 +30,5 @@ dependencies:
 
 
 dev_dependencies:
-  flutter_lints: ^3.0.0
   drift_dev: ^2.15.0
   build_runner: ^2.4.6
-
-
-flutter:
-  uses-material-design: true
-
-platforms:
-  linux:
-  macos:
-  windows:
