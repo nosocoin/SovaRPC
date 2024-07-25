@@ -83,10 +83,10 @@ jobs:
         run: dart pub get
         
       - name: Compile RPC
-        run: dart compile exe bin/rpc.dart -o rpc_x64
+        run: dart compile exe bin/rpc.dart -o rpc
         
       - name: Compile Wallet
-        run: dart compile exe bin/wallet.dart -o wallet_x64
+        run: dart compile exe bin/wallet.dart -o wallet
 
       - name: Prepare artifact
         run: |
@@ -113,10 +113,10 @@ jobs:
         run: dart pub get
         
       - name: Compile RPC
-        run: dart compile exe bin/rpc.dart -o rpc_arm64 --target-os=macos --target-arch=arm64
+        run: dart compile exe bin/rpc.dart -o rpc
         
       - name: Compile Wallet
-        run: dart compile exe bin/wallet.dart -o wallet_arm64 --target-os=macos --target-arch=arm64
+        run: dart compile exe bin/wallet.dart -o wallet
 
       - name: Prepare artifact
         run: |
