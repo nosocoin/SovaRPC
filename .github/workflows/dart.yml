@@ -28,7 +28,7 @@ jobs:
         run: flutter pub get
 
       - name: Compile Dart CLI
-        run: dart compile exe rpc.dart -o rpc
+        run: dart compile exe bin/rpc.dart -o rpc
 
       - name: Prepare artifact
         run: |
