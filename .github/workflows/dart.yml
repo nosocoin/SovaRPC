@@ -1,0 +1,49 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+name: Dart
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    if: github.actor == 'pasichDev'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+
+      - name: Install dependencies
+        run: dart pub get
+
+      # Note: This workflow uses the latest stable version of the Flutter SDK.
+     # - uses: subosito/flutter-action@v2
+     #   with:
+     #     flutter-version: '3.22.3' # Вкажіть необхідну версію Flutter
+
+   #   - name: Install dependencies
+    #    run: flutter pub get
+
+      - name: Compile Dart CLI
+        run: dart compile exe bin/rpc.dart -o rpc
+
+      - name: Prepare artifact
+        run: |
+          mkdir -p release
+          mv rpc release/
+          tar -czvf release/rpc_ubuntu.tar.gz -C release rpc
+          ls -l release # Додано для перевірки наявності файлів
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: rpc-output
+          path: release/rpc_ubuntu.tar.gz
+
+ 
