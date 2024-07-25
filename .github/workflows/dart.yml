@@ -17,14 +17,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      # Note: This workflow uses the latest stable version of the Flutter SDK.
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.3' # Вкажіть необхідну версію Flutter
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
 
       - name: Install dependencies
-        run: flutter pub get
+        run: dart pub get
+
+      # Note: This workflow uses the latest stable version of the Flutter SDK.
+     # - uses: subosito/flutter-action@v2
+     #   with:
+     #     flutter-version: '3.22.3' # Вкажіть необхідну версію Flutter
+
+   #   - name: Install dependencies
+    #    run: flutter pub get
 
       - name: Compile Dart CLI
         run: dart compile exe bin/rpc.dart -o rpc
@@ -42,35 +46,4 @@ jobs:
           name: rpc-output
           path: release/rpc_ubuntu.tar.gz
 
-  release:
-    if: github.actor == 'pasichDev'
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Get version from pubspec.yaml
-        id: get_version
-        run: |
-          version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
-          echo "VERSION=$version" >> $GITHUB_ENV
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ env.VERSION }}
-          release_name: Release ${{ env.VERSION }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release/rpc_ubuntu.tar.gz
-          asset_name: rpc_ubuntu_${{ env.VERSION }}.tar.gz
-          asset_content_type: application/gzip
+ 
