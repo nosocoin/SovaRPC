@@ -73,7 +73,7 @@ jobs:
 
   build-macos-x64:
     if: github.actor == 'pasichDev'
-    runs-on: macos-latest
+    runs-on: macos-14-large
 
     steps:
       - uses: actions/checkout@v4
@@ -103,7 +103,7 @@ jobs:
 
   build-macos-arm64:
     if: github.actor == 'pasichDev'
-    runs-on: macos-latest
+    runs-on: macos-14-xlarge
 
     steps:
       - uses: actions/checkout@v4
