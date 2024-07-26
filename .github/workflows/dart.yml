@@ -73,11 +73,13 @@ jobs:
 
   build-macos-x64:
     if: github.actor == 'pasichDev'
-    runs-on: macos-14-large
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
       - uses: dart-lang/setup-dart@v1
+        with: 
+          architecture: x64
 
       - name: Install dependencies
         run: dart pub get
@@ -103,11 +105,13 @@ jobs:
 
   build-macos-arm64:
     if: github.actor == 'pasichDev'
-    runs-on: macos-14-xlarge
-
+    runs-on: macos-latest
+    
     steps:
       - uses: actions/checkout@v4
       - uses: dart-lang/setup-dart@v1
+        with: 
+          architecture: arm64
 
       - name: Install dependencies
         run: dart pub get
