@@ -45,8 +45,8 @@ jobs:
         run: |
           mkdir -p sova-cli/
           mv rpc wallet CHANGELOG.md LICENSE sova-cli/
-          tar -czvf sova-cli/SovaCLI-ubuntu-latest-x86_64.tar.gz -C sova-cli
-          ls -l sova-cli 
+          tar -czvf sova-cli/SovaCLI-ubuntu-latest-x86_64.tar.gz -C sova-cli .
+          ls -l sova-cli
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
