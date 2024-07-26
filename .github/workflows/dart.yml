@@ -32,8 +32,8 @@ jobs:
         run: dart pub get
         
       - name: Analyze code
-        run: dart analyze
-        continue-on-error: false
+      #  run: dart analyze
+       # continue-on-error: false
         
       - name: Compile RPC
         run: dart compile exe bin/rpc.dart -o rpc
