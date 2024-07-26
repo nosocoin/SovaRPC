@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sova-cli-ubuntu
-          path: release/SovaCLI-ubuntu-latest-x86_64.tar.gz
+          path: sova-cli/SovaCLI-ubuntu-latest-x86_64.tar.gz
 
   build-windows:
     if: github.actor == 'pasichDev'
