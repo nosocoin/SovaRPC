@@ -13,6 +13,11 @@ on:
      - "doc/**"
      - "tool/**"
      - ".vscode/**"
+     - 'README.md'
+     - '.gitignore'
+     - 'analysis_options.yaml'
+     - 'devtools_options.yaml'
+     - 'LICENSE'
 
 jobs:
   build-ubuntu:
@@ -26,18 +31,22 @@ jobs:
       - name: Install dependencies
         run: dart pub get
         
+      - name: Analyze code
+        run: dart analyze
+        continue-on-error: false
+        
       - name: Compile RPC
         run: dart compile exe bin/rpc.dart -o rpc
         
       - name: Compile Wallet
         run: dart compile exe bin/wallet.dart -o wallet
-
+        
       - name: Prepare artifact
         run: |
-          mkdir -p release/sova-cli
-          mv rpc wallet release/sova-cli/
-          tar -czvf release/SovaCLI-ubuntu-latest-x86_64.tar.gz -C release sova-cli
-          ls -l release 
+          mkdir -p sova-cli/
+          mv rpc wallet CHANGELOG.md LICENSE sova-cli/
+          tar -czvf sova-cli/SovaCLI-ubuntu-latest-x86_64.tar.gz -C sova-cli
+          ls -l sova-cli 
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
@@ -55,6 +64,10 @@ jobs:
 
       - name: Install dependencies
         run: dart pub get
+
+      - name: Analyze code
+        run: dart analyze
+        continue-on-error: false
         
       - name: Compile RPC
         run: dart compile exe bin/rpc.dart -o rpc.exe
@@ -87,6 +100,10 @@ jobs:
 
       - name: Install dependencies
         run: dart pub get
+
+      - name: Analyze code
+        run: dart analyze
+        continue-on-error: false
         
       - name: Compile RPC
         run: dart compile exe bin/rpc.dart -o rpc
@@ -119,6 +136,10 @@ jobs:
 
       - name: Install dependencies
         run: dart pub get
+
+      - name: Analyze code
+        run: dart analyze
+        continue-on-error: false
         
       - name: Compile RPC
         run: dart compile exe bin/rpc.dart -o rpc
