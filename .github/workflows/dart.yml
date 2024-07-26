@@ -79,16 +79,18 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          mkdir release\sova-cli
-          Move-Item -Path rpc.exe -Destination release\sova-cli\
-          Move-Item -Path wallet.exe -Destination release\sova-cli\
-          Compress-Archive -Path release\sova-cli\* -DestinationPath release\SovaCLI-windows-latest-x86_64.zip
-
+          mkdir -p sova-cli/
+          Move-Item -Path rpc.exe -Destination sova-cli/
+          Move-Item -Path wallet.exe -Destination sova-cli/
+          Move-Item -Path LICENSE -Destination sova-cli/
+          Move-Item -Path CHANGELOG.md -Destination sova-cli/
+          Compress-Archive -Path sova-cli\* -DestinationPath sova-cli\SovaCLI-windows-latest-x86_64.zip
+          
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: sova-cli-windows
-          path: release\SovaCLI-windows-latest-x86_64.zip
+          path: sova-cli\SovaCLI-windows-latest-x86_64.zip
 
   build-macos-x64:
     if: github.actor == 'pasichDev'
@@ -115,16 +117,18 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          mkdir -p release/sova-cli/
-          mv rpc wallet release/sova-cli/
-          tar -czvf release/SovaCLI-macos-x64-latest.tar.gz -C release sova-cli
-          ls -l release 
+          mkdir -p sova-cli/
+          mv rpc wallet CHANGELOG.md LICENSE sova-cli/
+          cd sova-cli
+          tar -czvf SovaCLI-macos-x64-latest.tar.gz *
+          cd ..
+          ls -l sova-cli
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: sova-cli-macos-x64
-          path: release/SovaCLI-macos-x64-latest.tar.gz
+          name: sova-cli-ubuntu
+          path: sova-cli/SovaCLI-macos-x64-latest.tar.gz
 
   build-macos-arm64:
     if: github.actor == 'pasichDev'
@@ -151,13 +155,15 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          mkdir -p release/sova-cli/
-          mv rpc wallet release/sova-cli/
-          tar -czvf release/SovaCLI-macos-arm64-latest.tar.gz -C release sova-cli
-          ls -l release 
+          mkdir -p sova-cli/
+          mv rpc wallet CHANGELOG.md LICENSE sova-cli/
+          cd sova-cli
+          tar -czvf SovaCLI-macos-arm64-latest.tar.gz *
+          cd ..
+          ls -l sova-cli
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: sova-cli-macos-arm64
-          path: release/SovaCLI-macos-arm64-latest.tar.gz
+          name: sova-cli-ubuntu
+          path: sova-cli/SovaCLI-macos-arm64-latest.tar.gz
