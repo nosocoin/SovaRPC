@@ -4,13 +4,13 @@ import 'package:noso_dart/models/noso/seed.dart';
 
 final class NetworkObject {
   static const List<String> seedsVerification = [
-    "20.199.50.27",
-    "84.247.143.153",
-    "64.69.43.225",
-    "4.233.61.8",
-    "141.11.192.215",
-    "23.95.216.80",
-    "142.171.231.9"
+    "204.10.194.22",
+    "204.10.194.29",
+    "204.10.194.32",
+    "204.10.194.26",
+    "204.10.194.33",
+    "38.242.252.153",
+    "62.171.172.186"
   ];
 
   static const int durationTimeOut = 3;
