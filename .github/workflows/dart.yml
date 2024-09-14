@@ -162,25 +162,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download ubuntu artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: sova-cli-ubuntu
           path: sova-cli
 
       - name: Download windows artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: sova-cli-windows
           path: sova-cli
 
       - name: Download macOS x64 artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: sova-cli-macos-x64
           path: sova-cli
 
       - name: Download macOS arm64 artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: sova-cli-macos-arm64
           path: sova-cli
@@ -207,7 +207,7 @@ jobs:
       - name: Create Release
         if: env.exists == 'false'
         id: create_release
-        uses: actions/create-release@v2
+        uses: actions/create-release@v1
         with:
           tag_name: ${{ env.TAG }}
           release_name: ${{ env.RELEASE_NAME }}
@@ -215,45 +215,45 @@ jobs:
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
 
 
       - name: Upload ubuntu asset
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: sova-cli/SovaCLI-ubuntu-latest-x86_64.tar.gz
           asset_name: SovaCLI-ubuntu-latest-x86_64.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
 
       - name: Upload windows asset
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: sova-cli/SovaCLI-windows-latest-x86_64.zip
           asset_name: SovaCLI-windows-latest-x86_64.zip
           asset_content_type: application/zip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
 
       - name: Upload macOS x64 asset
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: sova-cli/SovaCLI-macos-x64-latest.tar.gz
           asset_name: SovaCLI-macos-x64-latest.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
 
       - name: Upload macOS arm64 asset
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: sova-cli/SovaCLI-macos-arm64-latest.tar.gz
           asset_name: SovaCLI-macos-arm64-latest.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
