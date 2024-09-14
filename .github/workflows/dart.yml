@@ -188,10 +188,13 @@ jobs:
       - name: Get version from pubspec.yaml
         id: get_version
         run: |
-          VERSION=$(grep ^version pubspec.yaml | sed 's/version: //')
-          echo "::set-output name=VERSION::$VERSION"
-          echo "::set-output name=TAG::v$VERSION"
-          echo "::set-output name=RELEASE_NAME::Sova CLI $VERSION"
+         VERSION=$(grep ^version pubspec.yaml | sed 's/version: //')
+         echo "VERSION=$VERSION" >> $GITHUB_ENV
+         echo "TAG=v$VERSION" >> $GITHUB_ENV
+         echo "RELEASE_NAME=Sova CLI $VERSION" >> $GITHUB_ENV
+
+      - name: Display version
+        run: echo "The version is $VERSION"
 
       - name: Check if release exists
         id: check_release
