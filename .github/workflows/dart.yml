@@ -147,7 +147,7 @@ jobs:
           ls -l sova-cli
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: sova-cli-macos-arm64
           path: sova-cli/SovaCLI-macos-arm64-latest.tar.gz
@@ -162,25 +162,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download ubuntu artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: sova-cli-ubuntu
           path: sova-cli
 
       - name: Download windows artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: sova-cli-windows
           path: sova-cli
 
       - name: Download macOS x64 artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: sova-cli-macos-x64
           path: sova-cli
 
       - name: Download macOS arm64 artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: sova-cli-macos-arm64 
           path: sova-cli
