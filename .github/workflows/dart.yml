@@ -193,30 +193,30 @@ jobs:
          echo "TAG=v$VERSION" >> $GITHUB_ENV
          echo "RELEASE_NAME=Sova CLI $VERSION" >> $GITHUB_ENV
 
-     # - name: Display version
-     #   run: echo "The version is $VERSION"
-
-#      - name: Check if release exists
- #       id: check_release
-  #      run: |
-   #       if gh release view ${{ steps.get_version.outputs.TAG }}; then
-    #        echo "Release already exists"
-     #       exit 1
-      #    fi
-       # env:
-        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if Release Exists
+        id: check_release
+        run: |
+          if gh release view $TAG; then
+          echo "exists=true" >> $GITHUB_ENV
+          else
+          echo "exists=false" >> $GITHUB_ENV
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
+        if: env.exists == 'false'
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ steps.get_version.outputs.TAG }}
-          release_name: ${{ steps.get_version.outputs.RELEASE_NAME }}
+          tag_name: ${{ env.TAG }}
+          release_name: ${{ env.RELEASE_NAME }}
           body_path: CHANGELOG.md
           draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Upload ubuntu asset
         uses: actions/upload-release-asset@v1
