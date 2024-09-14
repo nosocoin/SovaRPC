@@ -2,7 +2,7 @@ name: sovarpc
 description: "SovaRPC"
 publish_to: 'none'
 
-version: 1.1.4
+version: 1.1.5
 
 environment:
   sdk: '>=3.3.2 <4.0.0'
@@ -19,7 +19,7 @@ dependencies:
   shelf_router: ^1.1.4
   noso_dart: 1.2.5
   noso_rest_api:
-    git: https://github.com/Noso-Project/noso_rest_api.git
+    git: https://github.com/nosocoin/noso_rest_api.git
   args: ^2.5.0
   settings_yaml: ^8.0.1
   logging: ^1.2.0

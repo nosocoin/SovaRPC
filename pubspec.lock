@@ -502,10 +502,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "3c0b47afacd2256cf526eebcc32856159350ef2e"
-      url: "https://github.com/Noso-Project/noso_rest_api.git"
+      resolved-ref: f65a92b6219660b6bbbffdb62ec9ba05d3d430d5
+      url: "https://github.com/nosocoin/noso_rest_api.git"
     source: git
-    version: "0.0.1"
+    version: "0.0.2"
   package_config:
     dependency: transitive
     description:
